@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<nav class="sidebar" th:fragment="nav-sidebar">
+	<ul class="list-unstyled">
+		<li sec:authorize="!isAuthenticated()">
+			<a href="/plataforma/"><i class="fas fa-tachometer-alt"></i> Painel Administrativo</a>
+		</li>
+		<li>
+			<a href="#submenu1" data-toggle="collapse"><i class="fas fa-user"></i> Usuário</a>
+			<ul id="submenu1" class="list-unstyled collapse">
+				<li>
+					<a href="/plataforma/listar"><i class="fas fa-users"></i> Usuários</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#submenu2" data-toggle="collapse"><i class="fab fa-elementor"></i> Situação</a>
+			<ul id="submenu2" class="list-unstyled collapse">
+				<li><a href="#"><i class="fas fa-file-alt"></i> Redações</a></li>
+				<li><a href="#"><i class="fas fa-paste"></i></i> Gerar relatório</a></li>
+				<li><a href="#"><i class="fas fa-chart-line"></i> Gráfico de rendimentos</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#submenu3" data-toggle="collapse"><i class="fas fa-chalkboard-teacher"></i> Professor</a>
+			<ul id="submenu3" class="list-unstyled collapse">
+				<li><a href="#"><i class="fas fa-user-cog"></i> Meus dados</a></li>
+				<li><a href="#"><i class="fas fa-file-alt"></i> Tema</a></li>
+				<li><a href="#"><i class="fas fa-file-signature"></i> Redações</a></li>
+				<li><a href="#"><i class="fas fa-chart-line"></i> Acompanhamento da turma</a></li>
+			</ul>
+		</li>
+			<li>
+			<a href="#submenu4" data-toggle="collapse"><i class="fas fa-graduation-cap"></i> Aluno</a>
+			<ul id="submenu4" class="list-unstyled collapse">
+				<li><a href="#"><i class="fas fa-user-cog"></i> Meus dados</a></li>
+				<li><a href="#"><i class="fas fa-file-signature"></i> Minhas Redações</a></li>
+				<li><a href="#"><i class="fas fa-chart-line"></i> Meu Rendimento</a></li>
+			</ul>
+		</li>
+		<li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+	</ul>
+</nav>
+</body>
+</html>

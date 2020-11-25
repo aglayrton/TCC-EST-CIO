@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:with="version=${#strings.randomAlphanumeric(3)}">
+<head>
+<title>Redação AFS</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Redação AFS</title>
+<link rel="icon" href="/imagem/favicon.ico">
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="/css/all.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+<script defer src="/js/all.js"></script>
+</head>
+<body>
+	
+	<header th:replace="fragments/header :: cabecalho">
+		<div>header</div>
+	</header>
+	
+	<div class="d-flex">
+		<aside>
+			<nav th:replace="fragments/sidebar :: nav-sidebar">
+				<span>menu</span>
+			</nav>
+		</aside>
+		
+		<section layout:fragment="corpo">
+			<div>Conteúdo principal das páginas</div>
+		</section>
+	</div>
+	
+	
+	
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- 	MEUS JS -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/dashboard.js"></script>
+
+	<script type="text/javascript">
+	var url = '';
+	
+	//quando clicado no botão que tem id comçando com btn_
+	$('button[id*="btn_"]').click(function() {
+		// _plataforma/excluir/3 retorna isso o código abaixo
+		url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+	});
+	
+	//passamos a url para o botão de confirmação
+	$('#ok_confirm').click(function() {
+		document.location.href = url;
+	});
+	
+
+	$(function() {
+		$('[data-toggle="popover"]').popover();
+	});
+	
+	$(document).ready(function(){
+	    $(".navbar-toggle").click(function(){
+	        $(".sidebar").toggleClass("sidebar-open");
+	    })
+	});
+
+	</script>
+</body>
+</html>
