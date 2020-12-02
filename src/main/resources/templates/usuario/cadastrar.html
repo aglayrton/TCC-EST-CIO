@@ -16,9 +16,9 @@
 				</div>
 			</a>
 		</div>
-		
+	<div th:replace="fragments/alert"></div>	
 	<hr>
-	<form th:action="@{/plataforma/salvar}" th:object="${usuario}" method="POST">
+	<form th:action="${usuario == null} ? @{/plataforma/salvar} : @{/plataforma/editar}" th:object="${usuario}" method="POST">
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label><span class="text-danger">*</span>Nome</label> 

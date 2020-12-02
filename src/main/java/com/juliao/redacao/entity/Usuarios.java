@@ -58,12 +58,12 @@ public class Usuarios implements Serializable{
 	}
 	
 	//ADICIONAR PERFIS A LISTA
-	public void addPerfil(PerfilTipo tipo) {
+	/*public void addPerfil(PerfilTipo tipo) {
 		if(this.perfis == null) {
 			this.perfis = new ArrayList<>();
 		}
-		this.perfis.add(new Perfis());
-	}
+		this.perfis.add(new Perfis(tipo.getCod()));
+	}*/
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////

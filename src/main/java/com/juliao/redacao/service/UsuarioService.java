@@ -32,22 +32,23 @@ public class UsuarioService implements UserDetailsService{
 	@Override @Transactional(readOnly = true) //usamos transactional para que ative a sessão com o banco de dados
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuarios usuario = buscarPorEmail(username);
-		return new User(
+		return new User(//objeto gerenciado pelo spring security
 				usuario.getEmail(), 
 				usuario.getSenha(),
-				AuthorityUtils.createAuthorityList(getStrings(usuario.getPerfis()))//pois senao aqui não funcionará
+				AuthorityUtils.createAuthorityList(getStrings(usuario.getPerfis()))//espera a lista de strings do nivel de perfil
 		);
 	}
 	
-	//retorna 
+	//retorna a lista de niveis de acesso
 	private String[] getStrings(List<Perfis> perfis) {
-		String [] authorities = new String[perfis.size()];
-		for(int i = 0; i < perfis.size(); i++) {
-			authorities[i] = perfis.get(i).getDescricao();
+		String [] autorizacoes = new String[perfis.size()]; //passa o tamanho da string
+		for(int i = 0; i < perfis.size(); i++) {//
+			autorizacoes[i] = perfis.get(i).getDescricao();//percorre cada vetor com valor e passa para o vetor autorizacoes
 		}
-		return authorities;
+		return autorizacoes;
 	}
 	
+	//Quando o usuario cadastrar, vai enviar a senha criptografada para dentro do banco de dados
 	@Transactional(readOnly = false)
 	public void salvarUsuario(Usuarios usuario) {
 		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
