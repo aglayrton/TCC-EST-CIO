@@ -56,18 +56,25 @@ public class UsuarioService implements UserDetailsService{
 		repository.save(usuario);
 	}
 
-	
+	@Transactional(readOnly = true)
 	public List<Usuarios> buscarTodos() {
 		List<Usuarios> u = repository.findAll();
 		return u;
 	}
-
+	
+	@Transactional(readOnly = true)
 	public Usuarios buscaPorId(Long id) {
 		return repository.findById(id).get();
 	}
-
+	
+	@Transactional(readOnly = true)
 	public void deletar(Long id) {
 		repository.deleteById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Usuarios> buscarPorNome(String nome) {
+		return repository.findByNome(nome);
 	}
 	
 }

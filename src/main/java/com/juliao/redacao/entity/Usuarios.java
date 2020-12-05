@@ -50,11 +50,7 @@ public class Usuarios implements Serializable{
 	
 	/*CONSTRUTORES*/
 	public Usuarios() {
-		super();
-	}
-	
-	public Usuarios(Long id) {
-		setId(id);
+
 	}
 	
 	//ADICIONAR PERFIS A LISTA

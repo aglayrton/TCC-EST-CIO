@@ -9,7 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class TccApplication {
 
 	public static void main(String[] args) {
-		//System.out.println(new BCryptPasswordEncoder().encode("123"));
+		/*System.out.println(new BCryptPasswordEncoder().encode("123"));
+		System.out.println(new BCryptPasswordEncoder().encode("123"));*/
 		SpringApplication.run(TccApplication.class, args);
 	}
 

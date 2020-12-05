@@ -10,7 +10,7 @@
 			<div class="mr-auto p-2">
 				<h2 class="display-4 titulo">Cadastrar Usuário</h2>
 			</div>
-			<a href="/plataforma/listar">
+			<a href="/usuarios/listar">
 				<div class="p-2">
 					<button class="btn btn-outline-info btn-sm">Listar</button>
 				</div>
@@ -18,11 +18,11 @@
 		</div>
 	<div th:replace="fragments/alert"></div>	
 	<hr>
-	<form th:action="${usuario == null} ? @{/plataforma/salvar} : @{/plataforma/editar}" th:object="${usuario}" method="POST">
+	<form th:action="${usuarios.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}" th:object="${usuarios}" method="POST">
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label><span class="text-danger">*</span>Nome</label> 
-				<input name="nome" type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Seu melhor e-mail">
+				<input name="nome" type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Digite o nome">
 			</div>
 			<div class="form-group col-md-6">
 				<label><span class="text-danger">*</span>E-mail</label> 

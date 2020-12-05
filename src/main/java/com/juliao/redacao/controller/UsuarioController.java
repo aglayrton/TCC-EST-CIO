@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,7 +27,7 @@ import com.juliao.redacao.repository.UsuarioRepository;
 import com.juliao.redacao.service.UsuarioService;
 
 @Controller
-@RequestMapping("/plataforma")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 	
 	/*DEPÊNDENCIAS*/
@@ -41,9 +42,9 @@ public class UsuarioController {
 		
 	/*ROTAS HTPP*/
 	@GetMapping("/cadastrar")
-	public ModelAndView cadastrar() {
+	public ModelAndView cadastrar(Usuarios usuarios) {
 		ModelAndView model = new ModelAndView("usuario/cadastrar");
-		model.addObject("usuario", new Usuarios());
+		model.addObject("usuarios", new Usuarios());
 		return model;
 	}
 	
@@ -59,7 +60,7 @@ public class UsuarioController {
 		return "usuario/listar";
 	}*/
 	
-	@GetMapping("**/listar")
+	@GetMapping("/listar")
 	public String carregarPessoaPorPaginacao(@PageableDefault(size = 2) Pageable pageable, ModelMap model) {
 		Page<Usuarios> pagePessoa = repository
 				.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("nome")));
@@ -75,27 +76,50 @@ public class UsuarioController {
 	
 	/*CRUD*/
 	@PostMapping("/salvar")
-	public String salvar(Usuarios usuario, RedirectAttributes attr) {
+	public String salvar(Usuarios usuarios, RedirectAttributes attr) {
 		try {
-			service.salvarUsuario(usuario);
+			service.salvarUsuario(usuarios);
 			attr.addFlashAttribute("success", "Operação realizada com sucesso!");
-			return "redirect:/plataforma/listar";
+			return "redirect:/usuarios/listar";
 		}catch(DataIntegrityViolationException e) {
 			attr.addFlashAttribute("fail", "Cadastro não realizado, email já existente.");
-			return "redirect:/plataforma/cadastrar";
+			return "redirect:/usuarios/cadastrar";
 		}
 		
 	}
 	
-	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("usuario", service.buscaPorId(id));
+	@PostMapping("/editar")
+	public String ediatr(Usuarios usuarios, RedirectAttributes attr) {
+		try {
+			service.salvarUsuario(usuarios);
+			attr.addFlashAttribute("success", "Edição realizada com sucesso!");
+			return "redirect:/usuarios/listar";
+		}catch(DataIntegrityViolationException e) {
+			attr.addFlashAttribute("fail", "Edição não realizada, email já existente.");
+			return "redirect:/usuarios/cadastrar";
+		}
+		
+	}
+	
+	@GetMapping("/preeditar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+		model.addAttribute("usuarios", service.buscaPorId(id));
 		return "usuario/cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		service.deletar(id);
+		attr.addFlashAttribute("success", "Exclusão realizada com sucesso!");
+		return "redirect:/usuarios/listar";
+	}
+	
+	@PostMapping("/buscar")
+	public String getNome(@RequestParam("nome") String nome, ModelMap model) {
+		model.addAttribute("usuarios", service.buscarPorNome(nome));
 		return "usuario/listar";
 	}
+	
+	
+	
 }

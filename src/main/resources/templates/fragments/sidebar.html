@@ -7,13 +7,13 @@
 	<nav class="sidebar" th:fragment="nav-sidebar">
 	<ul class="list-unstyled">
 		<li sec:authorize="!isAuthenticated()">
-			<a href="/plataforma/"><i class="fas fa-tachometer-alt"></i> Painel Administrativo</a>
+			<a href="/usuarios/"><i class="fas fa-tachometer-alt"></i> Painel Administrativo</a>
 		</li>
 		<li>
 			<a href="#submenu1" data-toggle="collapse"><i class="fas fa-user"></i> Usuário</a>
 			<ul id="submenu1" class="list-unstyled collapse">
 				<li>
-					<a href="/plataforma/listar"><i class="fas fa-users"></i> Usuários</a>
+					<a href="/usuarios/listar"><i class="fas fa-users"></i> Usuários</a>
 				</li>
 			</ul>
 		</li>

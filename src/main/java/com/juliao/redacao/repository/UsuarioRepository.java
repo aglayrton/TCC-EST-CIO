@@ -1,5 +1,7 @@
 package com.juliao.redacao.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +14,9 @@ public interface UsuarioRepository extends JpaRepository<Usuarios, Long> {
 	
 	@Query("select u from Usuarios u where u.email like :email")
 	Usuarios findByEmail(@Param("email") String email);
+	
+	@Query("select u from Usuarios u where u.nome like %?1%")
+	List<Usuarios> findByNome(String nome);
 	
 	
 }

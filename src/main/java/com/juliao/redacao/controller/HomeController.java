@@ -32,11 +32,12 @@ public class HomeController {
 	}
 	
 	//acesso negado
-		@GetMapping("/acesso-negado")
-		public String acessoNegado(ModelMap model, HttpServletResponse response) {
-			model.addAttribute("status", response.getStatus());
-			model.addAttribute("error", "Acesso negado");
-			model.addAttribute("message","Você não tem permissão para acesso ou ação");
-			return "error";
-		}
+	@GetMapping("/acesso-negado")
+	public String acessoNegado(ModelMap model, HttpServletResponse response) {
+		model.addAttribute("status", response.getStatus());
+		model.addAttribute("error", "Acesso negado");
+		model.addAttribute("message","Você não tem permissão para acesso ou ação");
+		return "error";
+	}
+	
 }
