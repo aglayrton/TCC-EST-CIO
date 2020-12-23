@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<div class="content p-1" layout:fragment="corpo">
+	<div class="list-group-item">
+		<div class="d-flex">
+			<div class="mr-auto p-2">
+				<h2 class="display-4 titulo">Cadastrar Usuário</h2>
+			</div>
+			<a href="/usuarios/listar">
+				<div class="p-2">
+					<button class="btn btn-outline-info btn-sm">Listar</button>
+				</div>
+			</a>
+		</div>
+	<div th:replace="fragments/alert"></div>	
+	<hr>
+	<form th:action="${usuarios.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}" th:object="${usuarios}" method="POST">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label><span class="text-danger">*</span>Nome</label> 
+				<input name="nome" type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Digite o nome">
+			</div>
+			<div class="form-group col-md-6">
+				<label><span class="text-danger">*</span>E-mail</label> 
+				<input name="email" type="email" class="form-control" id="email" th:field="*{email}" placeholder="Seu melhor e-mail">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label><span class="text-danger">*</span> Senha</label> 
+				<input name="senha" type="password"	th:field="*{senha}" class="form-control" id="senha"	placeholder="Senha com mínimo 6 caracteres">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-control col-md-3">
+				<label for="perfis">Perfil</label>
+				<select id="perfis" class="custom-select" size="4" th:field="*{perfis}">
+					<option value="">Selecione...</option>
+					<option th:each="p : ${perfis}" th:value="${p.id}" th:text="${p.descricao}">Médico</option>
+				</select>
+				<input type="hidden" value="0" name="perfis">
+				<div class="invalid-feedback">Pelo menos um perfil é requerido.</div>
+			</div>
+		</div>
+		<div class="form-row">	
+			<div class="form-group col-md-3">
+				<div class="custom-control custom-switch">
+				  <input type="checkbox" class="custom-control-input" th:field="*{ativo}" id="ativo" 
+				  			th:if="${ativo == true ? 'checked=checked' : ''}" />
+				  <label class="custom-control-label" for="ativo">Cadastro Ativo</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row">	
+			<div class="form-group col-md-3">
+				<input type="hidden" th:field="*{id}"> 
+				<div class="col-sm-10">
+					<button type="submit" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="right" title="Salvar">
+						<i class="fas fa-save"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		
+		</form>
+	</div>
+</div>
+<div th:replace="fragments/modal :: modal"></div>
+</body>
+</html>

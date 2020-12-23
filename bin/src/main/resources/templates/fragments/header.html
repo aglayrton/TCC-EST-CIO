@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<header th:fragment="cabecalho">
+		<nav class="navbar navbar-expand navbar-dark bg-primary">
+			<a class="sidebar-toggle text-light mr-3"> 
+				<span class="navbar-toggler-icon"></span>
+			</a> 
+			<a class="navbar-brand" href="#">PLATAFORMA AFS REDAÇÕES</a>
+			
+			<div class="collapse navbar-collapse">
+				<div class="navbar-nav ml-auto">
+				<form th:action="@{/logout}" sec:authorize="isAuthenticated()"
+					  method="post"  class="form-inline my-2 mt-md-0">
+					<div class="btn-group mb-2 mr-sm-2">
+						<button type="button" class="btn btn-light">
+							<i class="fas fa-user"></i> <span class="" sec:authentication="name">Bob</span>
+						</button>
+						<button type="submit" class="btn btn-danger">Sair</button>
+					</div>
+				</form>
+				</div>
+			</div>
+			
+		</nav>
+	</header>
+</body>
+</html>

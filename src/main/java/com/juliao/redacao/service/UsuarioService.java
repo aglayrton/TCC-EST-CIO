@@ -3,6 +3,8 @@ package com.juliao.redacao.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -72,9 +74,10 @@ public class UsuarioService implements UserDetailsService{
 		repository.deleteById(id);
 	}
 	
-	@Transactional(readOnly = true)
+	/*@Transactional(readOnly = true)
 	public List<Usuarios> buscarPorNome(String nome) {
 		return repository.findByNome(nome);
-	}
+	}*/
+	
 	
 }

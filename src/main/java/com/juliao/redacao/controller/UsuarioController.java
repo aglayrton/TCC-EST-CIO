@@ -26,6 +26,7 @@ import com.juliao.redacao.repository.PerfilRepository;
 import com.juliao.redacao.repository.UsuarioRepository;
 import com.juliao.redacao.service.UsuarioService;
 
+
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -115,11 +116,27 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/buscar")
-	public String getNome(@RequestParam("nome") String nome, ModelMap model) {
-		model.addAttribute("usuarios", service.buscarPorNome(nome));
-		return "usuario/listar";
+	public ModelAndView consultar(
+			@RequestParam("nomepesquisa") String nome, 
+			@PageableDefault(size = 5, sort = {"nome"}) Pageable pageable
+	) {
+		ModelAndView model = new ModelAndView("usuario/listar");
+		
+		Page<Usuarios> usuarios = repository.findByNomepage(nome, pageable);
+		model.addObject("usuarios", usuarios);
+		return model;
 	}
 	
-	
+	/*@PostMapping("/buscar")
+	public ModelAndView consultar(
+			@RequestParam("nomepesquisa") String nome, 
+			@PageableDefault(size = 5, sort = {"nome"}) Pageable pageable
+	) {
+		ModelAndView model = new ModelAndView("usuario/listar");
+		
+		List<Usuarios> usuarios = service.buscarPorNome(nome);
+		model.addObject("usuarios", usuarios);
+		return model;
+	}*/
 	
 }
